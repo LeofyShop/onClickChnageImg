@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>onClickChnageImage</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    <style type="text/css">
+         .color-selection label {
+            cursor: pointer;
+            display: inline-block;
+            margin: 5px 3px;
+        }
+        
+        .color-selection img {
+            width: 42px;
+            height: 42px;
+            border: 2px solid transparent;
+        }
+        
+        .color-selection input[type="radio"] {
+            display: none;
+        }
+        
+        .color-selection input[type="radio"]:checked+img {
+            border: 2px solid #000;
+        }
+        
+        .main-image img {
+            width: 100%;
+           
+        }
+        .tooltip.fade.bs-tooltip-bottom.show{
+background: transparent;
+    border: none;
+    }
+
+    .tooltip:before {
+    border-color: rgba(221, 221, 221, 0);
+    border-right-color: #ddd0;
+    border-width: 0;
+    margin-top: 0;
+}
+        .color-selector select {
+            border: 1px solid grey;
+            border-radius: 5px;
+            padding: 5px 10px;
+            height: 40px;
+        }
+        .color-selector select:focus{
+            border-bottom: 1px solid grey;
+            outline: none;
+            box-shadow: 0 0 5px #1e90ff;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+  <div class="row bgx pt-4">
+    <div class="col-12 col-lg-4 text-center px-0 ">
+      <div class="main-image">
+        <img id="productImage" src="images/navy.png" alt="Navy/Big Wave Blue" class="product img-fluid prod-img pro-img-ch">
+    </div>
+    <div class="color-selection">
+            <label data-toggle="tooltip" data-placement="bottom" title="Navy/Big Wave Blue">
+                <input type="radio" name="color" value="images/navy.png" data-name="Navy/Big Wave Blue" checked >
+                <img src="images/navy.png" alt="Navy/Big Wave Blue">
+            </label>
+            <label data-toggle="tooltip" data-placement="bottom" title="Wild Red Vine">
+                <input type="radio" name="color" value="images/wild-red.png" data-name="Wild Red Vine">
+                <img src="images/wild-red.png"  alt="Teal/Orange" >
+            </label>
+            <label data-toggle="tooltip" data-placement="bottom" title="Agave Teal">
+                <input type="radio" name="color" value="images/AgaveTeal.png" data-name="Agave Teal">
+                <img src="images/AgaveTeal.png"  alt="Charcoal" >
+            </label>
+            <label data-toggle="tooltip" data-placement="bottom" title="Orange/King Crab Orange">
+                <input type="radio" name="color" value="images/orange.png" data-name="Orange/King Crab Orange" >
+                <img src="images/orange.png" alt="Orange" >
+            </label>
+            <label data-toggle="tooltip" data-placement="bottom" title="Cosmic Lilac">
+                <input type="radio" name="color" value="images/cosmic-lilac.png" data-name="Cosmic Lilac">
+                <img src="images/cosmic-lilac.png"  alt="Cosmic Lilac">
+            </label>
+            <label data-toggle="tooltip" data-placement="bottom" title="Camp Green">
+                <input type="radio" name="color" value="images/CampGreen.png" data-name="Camp Green">
+                <img src="images/CampGreen.png"  alt="Camp Green">
+            </label>
+            <label data-toggle="tooltip" data-placement="bottom" title="Black">
+                <input type="radio" name="color" value="images/black.png" data-name="Black">
+                <img src="images/black.png" alt="Black">
+            </label>
+             <label data-toggle="tooltip" data-placement="bottom" title="Navy">
+                <input type="radio" name="color" value="images/navy-n.png" data-name="Navy">
+                <img src="images/navy-n.png" alt="Navy">
+            </label>
+        </div>
+    </div>
+    <div class="col-12 col-lg-4">
+      <h3 id="productName">YETI Hopper M20 Soft Backpack Cooler -<span class="Clorflar"> Teal </span></h3>
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(() => {
+      
+   $('[data-toggle="tooltip"]').tooltip();
+            const radioButtons = document.querySelectorAll('.color-selection input[type="radio"]');
+            const mainImage = document.getElementById('productImage');
+            const productName = document.getElementById('productName');
+
+            radioButtons.forEach(radio => {
+                radio.addEventListener('change', () => {
+                    if (radio.checked) {
+                        mainImage.src = radio.value;
+                        mainImage.alt = radio.dataset.name;
+                        productName.textContent = `YETI Hopper M20 Soft Backpack Cooler - ${radio.dataset.name}`;
+                         $(".Clorflar").html(radio.dataset.name)
+      
+           localStorage.setItem('selectedColor', radio.value);
+          localStorage.setItem('savetitle', radio.dataset.name);
+                    }
+                });
+            });
+
+            const defaultRadio = document.querySelector('input[type="radio"]:checked');
+            if (defaultRadio) {
+                defaultRadio.dispatchEvent(new Event('change'));
+            }
+        });
+</script>
+</body>
+</html>
+
